@@ -1,329 +1,139 @@
 <template>
-  <div class="home-wapper">
+  <div id="index">
+    <div class="page">
+      <div class="page__bd">
+        <div class="weui-tab">
+          <div class="weui-navbar">
+            <block v-for="(item,index) in tabs" :key="index">
+              <div :id="index" :class="['weui-navbar__item', activeIndex === index ? 'weui-bar__item_on' : '']"
+                @click="tabClick">
+                <div class="weui-navbar__title">{{item}}</div>
+              </div>
+            </block>
+          </div>
+          <div class="weui-tab__panel">
+            <div class="weui-tab__content" :hidden="activeIndex != 0">
+              <div class="weui-article">
+                <div class="weui-article__h1">大标题</div>
+                <div class="weui-article__section">
+                  <div class="weui-article__title">章标题</div>
+                  <div class="weui-article__section">
+                    <div class="weui-article__h3">1.1 节标题</div>
+                    <div class="weui-article__p">
+                      Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut
+                      labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris
+                      nisi ut aliquip ex ea commodo consequat.
+                    </div>
+                    <div class="weui-article__p">
+                      <image class="weui-article__img" :src="imgSrc" mode="aspectFit"
+                        style="height: 180px" />
+                      <image class="weui-article__img" :src="imgSrc" mode="aspectFit"
+                        style="height: 180px" />
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+            <div class="weui-tab__content" :hidden="activeIndex != 1">选项二的内容</div>
+            <div class="weui-tab__content" :hidden="activeIndex != 2">
+              <div class="page">
+                <div class="page__bd page__bd_spacing">
+                  <div class="weui-flex">
+                    <div class="weui-flex__item">
+                      <div class="placeholder">理财</div>
+                    </div>
+                    <div class="weui-flex__item">
+                      <div class="placeholder">轻音乐</div>
+                    </div>
+                  </div>
+                  <div class="weui-flex">
+                    <div class="weui-flex__item">
+                      <div class="placeholder">手账</div>
+                    </div>
+                    <div class="weui-flex__item">
+                      <div class="placeholder">古典音乐</div>
+                    </div>
+                    <div class="weui-flex__item">
+                      <div class="placeholder">电影</div>
+                    </div>
+                  </div>
+                  <div class="weui-flex">
+                    <div class="weui-flex__item">
+                      <div class="placeholder">手机摄影</div>
+                    </div>
+                    <div class="weui-flex__item">
+                      <div class="placeholder">健身</div>
+                    </div>
+                    <div class="weui-flex__item">
+                      <div class="placeholder">设计</div>
+                    </div>
+                    <div class="weui-flex__item">
+                      <div class="placeholder">饮食</div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
 
-
-    <div class="title-wapper">
-      <span>全年累计计算个人所得税</span>
-      <br>
-      <label>输入相关数据计算出本年每月的税收详情，供大家参考</label>
     </div>
-
-    <div>
-      <div class="header-wapper">
-        <div class="item_list_style"></div>
-        <span>请输入你的工资</span>
-      </div>
-      <div class="divier-line"></div>
-      <div class="content-wapper">
-        <span>工资</span>
-        <label>
-          <input type="text" v-model="param.salary" @input="change(param.salary,0)" placeholder="请输入你的工资"/>
-        </label>
-        <div class="unit">元</div>
-      </div>
-    </div>
-
-
-    <div style="margin-top: 0.3rem">
-      <div class="header-wapper">
-        <div class="item_list_style"></div>
-        <span>请输入社保和公积金的总额</span>
-      </div>
-      <div class="divier-line"></div>
-      <div class="content-wapper">
-        <span>总额</span>
-        <label>
-          <input type="text" v-model="param.social_insurance" @input="change(param.social_insurance,1)"
-                 placeholder="请输入社保和公积金的总额"/>
-        </label>
-        <div class="unit">元</div>
-      </div>
-    </div>
-
-    <div style="margin-top: 0.3rem">
-      <div class="header-wapper">
-        <div class="item_list_style"></div>
-        <span>请输入专项扣除总额（租房，房贷等）</span>
-      </div>
-      <div class="divier-line"></div>
-      <div class="content-wapper">
-        <span>总额</span>
-        <label>
-          <input type="text" v-model="param.social_plus" @input="change(param.social_plus,2)"
-                 placeholder="请输入专项扣除总额"/>
-        </label>
-        <div class="unit">元</div>
-      </div>
-    </div>
-
-    <div style="margin-top: 20px">
-      <div class="tips-wapper">
-        <span style="color: #fb883c;font-size: 12px;margin-left: .38rem">
-                  注意：本次计算个税起点5000元。
-        </span>
-      </div>
-    </div>
-    <div>
-      <div class="submit-wapper">
-        <button @click="submit">提交</button>
-      </div>
+    <div class="weui-footer weui-footer_fixed-bottom">
+      <div class="weui-footer__text">Copyright © 2008-2018 海边的小溪鱼</div>
     </div>
   </div>
 </template>
 
 <script>
-  import store from '../counter/store'
-
   export default {
     data() {
       return {
-        check: {
-          numberOfHouses: false,
-          remainingAssets: false
-        },
-        param: {
-          salary: "",
-          social_insurance: "",
-          social_plus: "",
-          entryCustDto: ''
-        },
-        computeResult: []
+        tabs: ['轻芒', '深度阅读', '兴趣'],
+        activeIndex: 0,
+        imgSrc:require("../../../static/images/a.jpg")
       }
     },
-
-    components: {},
-
     methods: {
-      submit() {
-
-        if (this.param.salary === null || this.param.salary === "" || this.param.salary === undefined) {
-          wx.showToast({
-            title: '请输入正确的金额格式',
-            icon: "none",
-            duration: 2000
-          });
-          return;
-        }
-
-        if (this.param.social_insurance === "") {
-          this.param.social_insurance = 0;
-        }
-
-        if (this.param.social_plus === "") {
-          this.param.social_plus = 0;
-        }
-
-        if (parseFloat(this.param.salary) - parseFloat(this.param.social_insurance) - parseFloat(this.param.social_plus) <= 5000) {
-          wx.showToast({
-            title: '您不用缴税收',
-            icon: "none",
-            duration: 2000
-          });
-          return;
-        }
-
-        store.state.handleResult = [];
-        this.computeResult = [];
-        //之前月份税收总金额
-        let oldMonthSum = 0;
-        for (let i = 1; i <= 12; i++) {
-          // 10000 是工资********
-          //500 是社保、公积金总额********
-          //800是专项扣除，比如房贷 如果没有 请删除********
-          //5000是税收起点********
-          let adjective = (this.param.salary - this.param.social_insurance - this.param.social_plus - 5000) * i;
-          let result = 0.00;
-          if (adjective < 36000) {
-            result = adjective * 0.03 - oldMonthSum;
-            result = Math.floor(result * 100) / 100;
-          } else if (adjective > 36000 && adjective <= 144000) {
-            result = adjective * 0.1 - 2520 - oldMonthSum;
-            result = Math.floor(result * 100) / 100;
-          } else if (adjective > 144000 && adjective <= 300000) {
-            result = adjective * 0.2 - 16920 - oldMonthSum;
-            result = Math.floor(result * 100) / 100;
-          } else if (adjective > 300000 && adjective <= 420000) {
-            result = adjective * 0.25 - 31920 - oldMonthSum;
-            result = Math.floor(result * 100) / 100;
-          } else if (adjective > 420000 && adjective <= 660000) {
-            result = adjective * 0.3 - 52920 - oldMonthSum;
-            result = Math.floor(result * 100) / 100;
-          } else if (adjective > 660000 && adjective <= 960000) {
-            result = adjective * 0.35 - 85920 - oldMonthSum;
-            result = Math.floor(result * 100) / 100;
-          } else if (adjective > 960000) {
-            result = adjective * 0.45 - 181920 - oldMonthSum;
-            result = Math.floor(result * 100) / 100;
-          }
-          this.computeResult.push(result);
-          oldMonthSum += result;
-        }
-        store.state.handleResult = this.computeResult;
-
-        console.log(store.state.handleResult.toString())
-        const url = '../result/main';
-        wx.navigateTo({url})
-
-      },
-      change(val, index) {
-        val = val.replace(/(^\s*)|(\s*$)/g, "")
-        if (!val) {
-          if (index === 0) {
-            this.param.salary = "";
-          } else if (index === 1) {
-            this.param.social_insurance = "";
-          } else {
-            this.param.social_plus = "";
-          }
-          return
-        }
-        var reg = /[^\d.]/g
-
-        // 只能是数字和小数点，不能是其他输入
-        val = val.replace(reg, "")
-
-        // 保证第一位只能是数字，不能是点
-        val = val.replace(/^\./g, "");
-        // 小数只能出现1位
-        val = val.replace(".", "$#$").replace(/\./g, "").replace("$#$", ".");
-        // 小数点后面保留2位
-        val = val.replace(/^(\-)*(\d+)\.(\d\d).*$/, '$1$2.$3');
-
-        if (index === 0) {
-          this.param.salary = val;
-        } else if (index === 1) {
-          this.param.social_insurance = val;
-        } else {
-          this.param.social_plus = val;
-        }
+      tabClick(e) {
+        console.log(e);
+        this.activeIndex = Number(e.currentTarget.id);
       }
     },
-
-    created() {
-    }
+    created() {}
   }
+
 </script>
 
 <style lang="less">
-  @import "./reset.css";
-
-  .home-wapper {
-    background: #FAFBFC;
-
-    .title-wapper {
-      width: 100%;
-      height: 2rem;
-      background: #4c84ff;
-      display: flex;
-      flex-direction: column;
-      justify-content: center;
-
-      & > span {
-        font-family: PingFangSC-Semibold;
-        font-size: 0.32rem;
-        color: #ffffff;
-        margin-left: .3rem;
-      }
-
-      & > label {
-        font-family: PingFangSC-Semibold;
-        font-size: 0.24rem;
-        color: #8cf0ff;
-        margin-left: .3rem;
-      }
-    }
-
-
-    .header-wapper {
-      background: white;
-      height: 1rem;
-      display: flex;
-      flex-direction: row;
-      align-items: center;
-
-      .item_list_style {
-        width: 0.06rem;
-        height: 0.3rem;
-        background-color: #4c84ff;
-      }
-
-      & > span {
-        font-size: 0.3rem;
-        margin-left: .24rem;
-        color: #4c84ff;
-        font-weight: bold;
-      }
-    }
-
-    .divier-line {
-      height: 0.02rem;
-      width: 0.3rem;
-      background: white;
-    }
-
-    .content-wapper {
-      background: white;
-      display: flex;
-      height: 1rem;
-      align-items: center;
-
-      & > span {
-        flex: 1;
-        font-family: PingFangSC-Regular;
-        font-size: 0.28rem;
-        font-weight: normal;
-        font-stretch: normal;
-        letter-spacing: 0rem;
-        color: #727790;
-        margin-left: .3rem;
-      }
-
-      & > label {
-        flex: 2;
-        width: 0.67rem;
-        height: 1rem;
-        line-height: 1rem;
-        font-family: PingFangSC-Regular;
-        font-size: 0.28rem;
-        font-weight: normal;
-        font-stretch: normal;
-        letter-spacing: 0rem;
-        color: #2f3240;
-
-        & > input {
-          height: 1rem;
-          text-align: right;
-          margin-right: .16rem;
-        }
-      }
-
-      .unit {
-        font-family: PingFangSC-Regular;
-        font-size: 0.28rem;
-        font-weight: normal;
-        font-stretch: normal;
-        letter-spacing: 0rem;
-        color: #727790;
-        height: 1rem;
-        text-align: center;
-        display: block;
-        padding-right: .32rem;
-        line-height: 1rem;
-      }
-    }
-
-    .submit-wapper {
-
-      margin-top: 80px;
-
-      & > button {
-        width: 6.5rem;
-        height: 0.9rem;
-        background-color: #4c84ff;
-        box-shadow: 0rem 0.08rem 0.2rem 0rem rgba(76, 132, 255, 0.3);
-        border-radius: 0.04rem;
-        color: white;
-      }
-    }
+  // @import "./reset.css";
+  page,
+  .page,
+  .page__bd {
+    height: 100%;
   }
+
+  .page__bd {
+    padding-bottom: 0;
+  }
+
+  .weui-navbar__title {
+    display: block;
+  }
+
+  .weui-tab__content {
+    padding-top: 60px;
+    text-align: center;
+  }
+
+  .placeholder {
+    margin: 5px;
+    padding: 0 10px;
+    text-align: center;
+    background-color: #ebebeb;
+    height: 2.3em;
+    line-height: 2.3em;
+    color: #cfcfcf;
+  }
+
 </style>

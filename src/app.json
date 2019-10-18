@@ -1,14 +1,11 @@
 {
   "pages": [
-    "pages/index/main",
-    "pages/counter/main",
-    "pages/result/main",
-    "pages/logs/main"
+    "pages/index/main"
   ],
   "window": {
     "backgroundTextStyle": "light",
     "navigationBarBackgroundColor": "#fff",
-    "navigationBarTitleText": "个税点点",
+    "navigationBarTitleText": "MM",
     "navigationBarTextStyle": "black"
   }
 }
